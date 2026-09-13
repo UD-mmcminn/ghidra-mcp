@@ -132,8 +132,10 @@ testing nothing.
 ### Fixed
 
 - **The headless Docker image builds on current Ubuntu Noble-based Temurin
-  images.** Container user creation now allocates available numeric IDs instead
-  of assuming UID and GID 1000 are unused by the base image.
+  images while preserving access to existing data and project volumes.**
+  Container user creation reclaims UID and GID 1000 from the base image and
+  assigns them explicitly to `ghidra`, retaining the numeric ownership expected
+  by persisted volumes.
 - **`close_program` and auto-analysis could freeze the MCP server.** Both paths
   now stay responsive.
 - **`debugger_launch`** failed for reasons that had been misattributed to the
